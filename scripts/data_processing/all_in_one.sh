@@ -27,6 +27,11 @@ sample_id=601417001
 #zcat $fastq_name'_R1_001.fastq.gz' $fastq_name'_R1_002.fastq.gz' > $sample_id'_1.fastq.gz';
 #zcat $fastq_name'_R2_001.fastq.gz' $fastq_name'_R2_002.fastq.gz' > $sample_id'_2.fastq.gz';
 
+java -jar $TRIMMOMATIC_JAR PE -phred33 -summary $sample_id'_statsSummaryFile' -threads 16 $sample_id'_1.fastq.gz' $sample_id'_2.fastq.gz' \
+$sample_id'_cleaned_1.fastq.gz' $sample_id'_unpaired_1.fastq.gz' \
+$sample_id'_cleaned_2.fastq.gz' $sample_id'_unpaired_2.fastq.gz' \
+ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+
 ### bwa align against human host genome hg19 to remove host reads
 #bwa mem /scratch/dragon/intel/x_caoh/microbiome_ref/pig_ref/GCA_000003025.6_Sscrofa11.1_genomic.fna $sample_id'_1.fastq.gz' $sample_id'_2.fastq.gz' > $sample_id.sam;
 #bwa mem /scratch/dragon/intel/x_caoh/microbiome_ref/host_ref/hg19_rRNA_mito_Hsapiens_rna.fa $fastq_name'_1.fastq.gz' $fastq_name'_2.fastq.gz' > $sample_id.sam;
