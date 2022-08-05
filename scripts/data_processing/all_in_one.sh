@@ -16,7 +16,7 @@ module load samtools/1.8
 module load bedtools/2.26.0/gnu-6.4.0;
 module load perl;
 module load python/2.7.14;
-
+module load trimmomatic/0.38;
 module load spades/3.11.1
 
 ##### input fastq file name and sample id
